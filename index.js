@@ -5,18 +5,18 @@ const mysql = require("mysql2")
 const bodyParser = require("body-parser")
 
 const app = express()
-const PUERTO = process.env.PORT || 3000;
-/*const PUERTO = 3000*/
+/*const PUERTO = process.env.PORT || 3000;*/
+const PUERTO = 3000
 
 app.use(bodyParser.json())
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-   /* user: "appclinicaprueba@gmail.com",
-    pass: "cknh kkkd daom zvyb",*/
-        user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
+    user: "appclinicaprueba@gmail.com",
+    pass: "cknh kkkd daom zvyb",
+      /*  user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,*/
   },
 });  
 
@@ -1084,8 +1084,8 @@ app.post("/especialidad/agregar", (req, res) => {
 
 
 app.listen(PUERTO,()=>{
-   /* console.log("Servidor corriendo en el puerto "+ PUERTO)*/
-   console.log(`Servidor escuchando en el puerto ${PUERTO}`)
+   console.log("Servidor corriendo en el puerto "+ PUERTO)
+   /*console.log(`Servidor escuchando en el puerto ${PUERTO}`)*/
 });
 
 

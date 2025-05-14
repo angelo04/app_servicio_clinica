@@ -1133,11 +1133,9 @@ app.put("/especialidad/actualizar/:id", (req, res) => {
 });
 
 
-
-app.listen(PUERTO,()=>{
-   console.log("Servidor corriendo en el puerto "+ PUERTO)
+/*app.listen(PUERTO,()=>{
+   console.log("Servidor corriendo en el puerto "+ PUERTO)*/
    /*console.log(`Servidor escuchando en el puerto ${PUERTO}`)*/
-});
-
+/*});*/
 
 

@@ -1,4 +1,4 @@
-require("dotenv").config();
+//require("dotenv").config();
 const express = require("express")
 const nodemailer = require("nodemailer");
 const mysql = require("mysql2")
@@ -13,14 +13,15 @@ app.use(bodyParser.json())
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "appclinicaprueba@gmail.com",
-    pass: "cknh kkkd daom zvyb",
-      /*  user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,*/
+    //user: "appclinicaprueba@gmail.com",
+    //pass: "cknh kkkd daom zvyb",
+      user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-const conexion = mysql.createConnection({
+//const conexion = mysql.createConnection({
+const pool = mysql.createPool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   database: process.env.DB_NAME,
@@ -29,7 +30,7 @@ const conexion = mysql.createConnection({
    connectionLimit: 10,
 });
 
-conexion.connect(error =>{
+pool.connect(error =>{
     if(error) throw error
     console.log("Conexion exitosa a la base de datos")
 })
@@ -45,7 +46,8 @@ app.listen(PUERTO,()=>{
 /*Correos*/
 function enviarCorreo(destinatario, fecha, hora) {
   const mailOptions = {
-    from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    //from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    from: `\"Clínica Salud Total\" <${process.env.EMAIL_USER}>`,
     to: destinatario,
     subject: "Confirmación de tu cita médica",
     html: `
@@ -72,7 +74,8 @@ function enviarCorreo(destinatario, fecha, hora) {
 
 function enviarCorreoBienvenida(destinatario, nombre) {
   const mailOptions = {
-    from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    //from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+      from: `\"Clínica Salud Total\" <${process.env.EMAIL_USER}>`,
     to: destinatario,
     subject: "Bienvenido a Clínica Salud Total",
     html: `
@@ -99,7 +102,8 @@ function enviarCorreoBienvenida(destinatario, nombre) {
 
 function enviarCorreoRecuperacion(destinatario, nombre, contrasena) {
   const mailOptions = {
-    from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    //from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    from: `\"Clínica Salud Total\" <${process.env.EMAIL_USER}>`,
     to: destinatario,
     subject: "Recuperación de contraseña - Clínica Salud Total",
     html: `
@@ -130,7 +134,8 @@ function enviarCorreoRecuperacion(destinatario, nombre, contrasena) {
 
 function enviarCorreoActualizacion(destinatario, fecha, hora) {
   const mailOptions = {
-    from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    //from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    from: `\"Clínica Salud Total\" <${process.env.EMAIL_USER}>`,
     to: destinatario,
     subject: "Actualización de tu cita médica",
     html: `
@@ -158,7 +163,8 @@ function enviarCorreoActualizacion(destinatario, fecha, hora) {
 
 function enviarCorreoCancelacion(destinatario, fecha, hora) {
   const mailOptions = {
-    from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    //from: '"Clínica Salud Total" <appclinicaprueba@gmail.com>',
+    from: `\"Clínica Salud Total\" <${process.env.EMAIL_USER}>`,
     to: destinatario,
     subject: "Cancelación de tu cita médica",
     html: `

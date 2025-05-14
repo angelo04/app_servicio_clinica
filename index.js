@@ -1,7 +1,5 @@
 require("dotenv").config();
-
 const express = require("express")
-
 const nodemailer = require("nodemailer");
 const mysql = require("mysql2")
 const bodyParser = require("body-parser")
@@ -11,6 +9,7 @@ const PUERTO = process.env.PORT || 3000;
 
 app.use(bodyParser.json())
 
+// Configurar nodemailer con variables de entorno
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -26,7 +25,8 @@ const conexion = mysql.createConnection({
   port: process.env.DB_PORT,
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD
+  password: process.env.DB_PASSWORD,
+   connectionLimit: 10,
 });
 
 conexion.connect(error =>{
@@ -1131,11 +1131,5 @@ app.put("/especialidad/actualizar/:id", (req, res) => {
     res.json({ mensaje: "Especialidad actualizada correctamente" });
   });
 });
-
-
-/*app.listen(PUERTO,()=>{
-   console.log("Servidor corriendo en el puerto "+ PUERTO)*/
-   /*console.log(`Servidor escuchando en el puerto ${PUERTO}`)*/
-/*});*/
 
 

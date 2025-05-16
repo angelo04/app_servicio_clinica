@@ -5,7 +5,7 @@ const mysql = require("mysql2")
 const bodyParser = require("body-parser")
 
 const app = express()
-//const PUERTO = process.env.PORT || 3000;
+
 const PUERTO = 3000
 
 app.use(bodyParser.json())
@@ -16,8 +16,6 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: "appclinicaprueba@gmail.com",
     pass: "cknh kkkd daom zvyb",
-      /*  user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,*/
   },
 });
 
